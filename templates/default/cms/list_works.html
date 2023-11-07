@@ -1,0 +1,102 @@
+{include file="header" /}
+<link rel="stylesheet" href="__STATIC__/libs/waterfull/waterfall.css">
+<link rel="stylesheet" href="__STATIC__/libs/viewer/viewer.css">
+<style type="text/css">
+body {
+    /*background: #f6f6f6;*/
+    background: #f2f2f2;
+}
+.main{
+    background: #f2f2f2;
+    min-width: 1240px;
+    width: 100%;
+    overflow: hidden;
+}
+.bbanner img{
+    width:100%;
+}
+.content {
+    min-height:500px;
+}
+.fact{
+    display: flex;
+
+    flex-wrap: wrap;
+    margin: 50px 100px;
+}
+.fact-item{
+    text-align: center;
+    flex: 0 0 15%;
+    padding:0.5%;
+}
+.fact-item img{
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+    width: 240px;
+    overflow: hidden;
+    height: 140px;
+}
+.fact-item h4{
+    text-align: center;
+    position: relative;
+    font-size: 13px;
+    font-style: normal;
+    padding-top: 10px;
+    font-weight: normal;
+    color: #666;
+}
+</style>
+
+<div class="bbanner">
+    {get sql="select * from yzn_picture where title = '半永久作品-banner'" order="hits DESC" num="1" cache="600" return="banner1"}
+    {volist name="banner1" id="b1v"}
+    <img src="{$b1v.thumb}" alt="">
+    {/volist}
+    {/get}
+</div>
+<div class="main w1800">
+    <div class="fact" id="fact">
+        {get sql="select * from yzn_picture where title = '半永久实操'" order="hits DESC" num="18" cache="600" return="fact"}
+        {volist name="fact" id="vo"}
+        <div class="fact-item">
+            <img src="{$vo.thumb}" data-original="{$vo.thumb}" alt="">
+            <h4>{$vo.description}</h4>
+        </div>
+        {/volist}
+        {/get}
+
+    </div>
+    <div class="content waterfall">
+            <!--S 右侧内容 -->
+            {yzn module="cms" action="lists" catid="$catid" order="listorder DESC" limit="$limit" return="data"}
+            {volist name="data" id="vo"}
+            <div class="item">
+                <a href="{$vo.url}">
+                    <p class="waterfall-img"><img src="{$vo.thumb}" alt=""></p>
+                    <p class="waterfall-tt">
+                        {$vo.title}
+                    <em>{$vo.inputtime|date='Y-m-d H:i'}</em>
+                    </p>
+                </a>
+            </div>
+            {/volist}
+            {/yzn}
+            <!--E 右侧内容 -->
+        </div>
+    <div class="bbanner">
+        {get sql="select * from yzn_picture where title = '半永久作品-底部'" order="hits DESC" num="1" cache="600" return="banner1"}
+        {volist name="banner1" id="b1v"}
+        <img src="{$b1v.thumb}" alt="">
+        {/volist}
+        {/get}
+    </div>
+</div>
+<script src="__STATIC__/libs/waterfull/waterfall-1.0.2.min.js"></script>
+<script src="__STATIC__/libs/viewer/viewer.js"></script>
+<script>
+    var grid = document.querySelector('.waterfall');
+    waterfall(grid);
+
+    new Viewer(document.getElementById('fact'))
+</script>
+{include file="footer" /}

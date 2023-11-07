@@ -1,0 +1,143 @@
+{include file="header" /}
+
+<!--S 轮播图-->
+<div class="fullSlide">
+    <div class="bd">
+        <ul>
+<!--            <li style="background:#fff center 0 no-repeat;"><img src="__IMG_PATH__/bannner3.jpg" alt=""></a>-->
+<!--            </li>-->
+<!--            <li style="background:#fff center 0 no-repeat;"><img src="__IMG_PATH__/bannner2.jpg" alt="">-->
+<!--            </li>-->
+<!--            <li  style="background:#fff center 0 no-repeat;"><img src="__IMG_PATH__/bannner.jpg" alt=""></a>-->
+<!--            </li>-->
+            {get sql="select * from yzn_picture where title = '首页-banner'" order="hits DESC" num="3" cache="600" return="banner1"}
+            {volist name="banner1" id="b1v"}
+            <li style="background:#fff center 0 no-repeat;"><img src="{$b1v.thumb}" alt=""></a>
+            </li>
+            {/volist}
+            {/get}
+        </ul>
+    </div>
+    <div class="hd">
+        <ul></ul>
+    </div>
+    <span class="prev"></span>
+    <span class="next"></span>
+</div>
+<div class="clearfloat"></div>
+<!--E 轮播图-->
+<!--S 分类-->
+<div class="main_cate">
+    <ul>
+        <!-- 新版的排列，把图片加入到a标签里面，让超链接点击面更广，修正align代码为alt-->
+        <li><a href="/lists/51.html" target="_black"><img src="__IMG_PATH__/round1.png"
+                                                       alt="关于我们">
+            <p>关于我们</p></a></li>
+        <li><a href="/lists/41.html" target="_black"><img src="__IMG_PATH__/round2.png"
+                                                     alt="美容课程">
+            <p>美容课程</p></a></li>
+        <li><a href="/lists/42.html" target="_black"><img src="__IMG_PATH__/round3.png"
+                                                    alt="化妆课程">
+            <p>化妆课程</p></a></li>
+        <li><a href="/lists/43.html" target="_black"><img src="__IMG_PATH__/round4.png"
+                                                    alt="半永久课程">
+            <p>半永久课程</p></a></li>
+        <li><a href="/lists/54.html" target="_black"><img src="__IMG_PATH__/round5.png"
+                                                    alt="名师团队">
+            <p>名师团队</p></a></li>
+    </ul>
+</div>
+<div class="main_pic">
+    <img src="__IMG_PATH__/brand01.jpg" alt="">
+    <img src="__IMG_PATH__/brand02.jpg" alt="">
+</div>
+<!--S 新闻-->
+<div class="main_new">
+    <div class="m_til">
+        <h5><em class="enfont"><script  type="text/javascript">document.write(day());</script>年学校各班级正在报名中<i></i></em></h5>
+    </div>
+    <div class="m_concat">
+        <ul class="clearfix">
+            <dl>
+                <dt ><img style="width:64px;" src="/static/addons/cms/images/tel.png"></dt>
+                <dd><b>全国咨询热线</b>18138837397</dd>
+            </dl>
+            <dl>
+                <dt><img src="/static/addons/cms/images/weixin.png" style="width:64px;"></dt>
+                <dd><b>微信咨询</b>cqgx178</dd>
+            </dl>
+        </ul>
+        <div class="clearfloat"></div>
+        <span>传奇光学美容技术咨询，致力于体验式技术研究和推广<br/>
+            结合多年直营门店运营推广经验<br/>
+            进行标准化和系统化管理，理论与实践相结合的模式。</span>
+        <div class="m_concat_btn">
+            <a rel="nofollow" href="/lists/38.html" target="_blank" >预约试听课程</a>
+        </div>
+
+    </div>
+</div>
+<!--E 新闻-->
+<!--S 老师-->
+<div class="main_teacher ">
+    <div class="main_teacher_title">名师团队</div>
+    <div class="main_teacher_desc">每天就像生活在时尚圈里，技术、眼界、整体能力不断在提升</div>
+    <div class="main_teacher_con w1200">
+        <div class="main_teacher_block">
+            {yzn module="cms" action="lists" catid="54" order="listorder DESC" limit="12" return="data"}
+            {volist name="data" id="vo"}
+            <div class="main_teacher_item">
+                <a href="{$vo.url}">
+                    <img src="{$vo.thumb}" alt="">
+                </a>
+            </div>
+            {/volist}
+            {/yzn}
+        </div>
+    </div>
+</div>
+<!--E 老师-->
+<div class="scene clearfix">
+    <div class="w1300">
+        <div class="main_scene_title"><img src="__STATIC__/addons/cms/images/what.png" alt=""></div>
+        <div class="main_scene_desc">新闻资讯</div>
+        <div>
+            <ul class="main_scene_con">
+                {yzn module="cms" action="lists" catid="44" order="listorder DESC" limit="5" return="data"}
+                {volist name="data" id="vo"}
+                <dl>
+                    <dt><a href="{$vo.url}"><img src="{$vo.thumb}" alt=""></a></dt>
+                    <dd>
+                        <a href="{$vo.url}">{$vo.title}</a>
+                    </dd>
+                </dl>
+                {/volist}
+                {/yzn}
+                {yzn module="cms" action="lists" catid="45" order="listorder DESC" limit="5" return="data"}
+                {volist name="data" id="vo"}
+                <dl>
+                    <dt><a href="{$vo.url}"><img src="{$vo.thumb}" alt=""></a></dt>
+                    <dd>
+                        <a href="{$vo.url}">{$vo.title}</a>
+                    </dd>
+                </dl>
+                {/volist}
+                {/yzn}
+                {yzn module="cms" action="lists" catid="46" order="listorder DESC" limit="5" return="data"}
+                {volist name="data" id="vo"}
+                <dl>
+                    <dt><a href="{$vo.url}"><img src="{$vo.thumb}" alt=""></a></dt>
+                    <dd>
+                        <a href="{$vo.url}">{$vo.title}</a>
+                    </dd>
+                </dl>
+                {/volist}
+                {/yzn}
+            </ul>
+        </div>
+        <div class="clearfloat"></div>
+    </div>
+</div>
+
+<!--E 现场-->
+{include file="footer" /}

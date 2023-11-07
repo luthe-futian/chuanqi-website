@@ -1,0 +1,64 @@
+.w1200, .w1300 {
+    width: 100%;
+}
+/*header  */
+.header .nav{
+    padding-right:0px;
+}
+.header .fr,.header .fl{
+    float: none;
+}
+/*首页*/
+/*.header .w1200,.main_teacher .w1200,.scene .w1300,.footer .w1200 ,.copy .w1200{*/
+/*    width:100%;*/
+/*}*/
+.header .logo {
+    padding-left: 0;
+}
+.header .w1300{
+    display: flex;
+    justify-content: center;
+}
+.header .logo{
+    display: none;
+}
+.header .topright{
+    width:auto;
+}
+.main_cate ul {
+    flex-wrap: wrap;
+}
+
+.main_cate ul li {
+    flex: 0 0 22%;
+}
+
+.main_teacher_block {
+    justify-content: center;
+}
+
+.main_teacher_item {
+    flex: 0 0 30%;
+}
+
+.main_scene_con {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.scene dl {
+    flex: 0 0 29%;
+    float: none;
+    width: auto;
+
+}
+
+.copy {
+    margin-bottom: 0;
+}
+/*联系我们*/
+/*实操*/
+.bfact{
+    min-width:400px !important;
+}

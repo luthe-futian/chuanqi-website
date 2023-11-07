@@ -1,0 +1,83 @@
+{include file="header" /}
+<link rel="stylesheet" href="__STATIC__/addons/cms/css/student.css">
+<style type="text/css">
+    body {
+        /*background: #f6f6f6;*/
+        background: #f2f2f2;
+    }
+
+    .main {
+
+    }
+
+    .bbanner img {
+        width: 100%;
+    }
+
+    .content {
+        min-height: 500px;
+    }
+</style>
+
+<div class="bbanner">
+    {get sql="select * from yzn_picture where title = '美容师+学员招聘-banner'" order="hits DESC" num="1" cache="600" return="banner1"}
+    {volist name="banner1" id="b1v"}
+    <img src="{$b1v.thumb}" alt="">
+    {/volist}
+    {/get}
+</div>
+<div class="clearfloat"></div>
+<div class="main w1200">
+    <div class="mod-tab-content">
+        <div class="brand-item brand-one-item white-bg">
+            <div class="mod-con clearfix">
+                {php}
+                $catid=request()->param('catid/d',0);
+                if (empty($catid)) {
+                $cat = request()->param('catdir/s', '');
+                $catid = getCategory($cat,'id');
+                }
+                $page=request()->param('page/d',1);
+                $offset=($page-1)*3;
+                $limit="$offset,3";
+                {/php}
+                {yzn module="cms" action="lists" catid="$catid" order="listorder DESC" limit="$limit" return="data"}
+                {volist name="data" id="vo"}
+                <a href="{$vo.url}">
+                    <div class="artice-box">
+                        {if $i%2 !== 0}
+                        <div class="text-box left-box">
+                            {else /}
+                            <div class="text-box right-box">
+                                {/if}
+                                <h3>{$vo.title}</h3>
+                                <p class="desc">
+                                    {$vo.description}</p>
+                            </div>
+                            <img src="{$vo.thumb}" alt="img" class="bg pc-bg">
+                            <img src="{$vo.thumb}" alt="img" class="mobile-bg">
+                        </div>
+                        {/volist}
+                        {/yzn}
+                        {if !$__LIST__}
+                        <div class="loadmore loadmore-line loadmore-nodata"><span class="loadmore-tips">暂无更多数据</span></div>
+                        {else /}
+                        <div class="tc">
+                            <a href="?page={:$page+1}" data-page="{$page}" class="btn btn-loadmore">加载更多</a>
+                        </div>
+                        {/if}
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bbanner">
+    {get sql="select * from yzn_picture where title = '美容师+学员招聘-底部'" order="hits DESC" num="1" cache="600" return="banner1"}
+    {volist name="banner1" id="b1v"}
+    <img src="{$b1v.thumb}" alt="">
+    {/volist}
+    {/get}
+</div>
+{include file="footer" /}

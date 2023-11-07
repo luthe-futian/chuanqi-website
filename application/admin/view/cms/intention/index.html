@@ -1,0 +1,66 @@
+{extend name="admin@index_layout"/}
+{block name="main"}
+<div class="layui-card">
+    <div class="layui-card-header">意向管理</div>
+    <div class="layui-card-body">
+        <div class="layui-form">
+            <table class="layui-hide" id="currentTable" lay-filter="currentTable"></table>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    layui.use(['yznTable'], function() {
+        var yznTable = layui.yznTable;
+
+        var init = {
+            table_elem: '#currentTable',
+            table_render_id: 'currentTable',
+            edit_url: "{:url('edit')}",
+            delete_url: "{:url('del')}",
+            modify_url: '{:url("multi")}',
+        };
+
+        yznTable.render({
+            init: init,
+            toolbar: ['refresh'],
+            url: '{:url("index")}',
+            cols: [
+                [
+                    { type: 'checkbox', fixed: 'left' },
+                    { field: 'id', width: 80, title: 'ID' , search:false},
+                    { field: 'name', width: 100, title: '姓名', searchOp: 'like'  },
+                    { field: 'tel', width: 100, title: '电话' },
+                    { field: 'weixin', width: 100, title: '微信号' },
+                    { field: 'intention',width: 100,align:"center", title: '意向'},
+                    { field: 'status',width: 100,align:"center", search:false,title: '状态',templet:function(d){
+                            if(d.status == 0){
+                                return "<span style='color:red;' >未处理</span>"
+                            }else{
+                                return '已处理';
+                            }
+                        }},
+                    { field: 'remark',align:"center", title: '备注'},
+                    { field: 'created_dt', width: 180, title: '提交时间', search: false },
+                    { field: 'updated_dt', width: 180, title: '处理时间', search: false },
+                    { width:90, title: '操作',templet:function(d){
+                        if(d.status == 0){
+                            return "<span class=\"layui-btn layui-btn-success layui-btn-xs\" onClick='dos("+d.id+")' data-title=\"处理\">处理</span>";
+                        }else{
+                            return "";
+                        }
+                    }}
+                ]
+            ],
+            page: {}
+        });
+
+    });
+    function dos(id){
+        $.get("{:url('edit')}?id="+id,function(){
+            window.location.href="{:url('index')}"
+        })
+    }
+</script>
+{/block}

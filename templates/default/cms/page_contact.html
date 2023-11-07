@@ -1,0 +1,118 @@
+{include file="header" /}
+<link rel="stylesheet" href="__STATIC__/libs/element/element.css">
+<style>
+    #main {
+        height: 100vh;
+    }
+
+    .bg {
+        position: relative;
+        height: 100%;
+        background: url(/static/addons/cms/images/bg_concat.jpg) no-repeat center center;
+        background-size: cover;
+        filter: blur(3px);
+        transform: scale(1.01);
+
+    }
+
+    .con {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .con_left{
+        color: #fff;
+        font-size: 24px;
+        text-align: left;
+        padding-right: 80px;
+    }
+    .con_left h3{
+        font-size: 35px;
+        line-height: 40px;
+    }
+    .con_left p{
+        padding-top: 24px;
+        padding-bottom: 16px;
+        font-size: 15px;
+    }
+    .card{
+        display: flex;
+        width:500px;
+        color:#fff;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: space-between;
+
+    }
+    .card-block{
+        background: rgba(255,255,255,.2);
+        border-radius: 6px;
+        width:49%;
+        height:70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-block img{
+        width:80%;
+    }
+    .left{
+        font-size: 16px;
+        width:30%;
+        text-align: center;
+    }
+    .right{
+        width:70%;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left:25px;
+    }
+    @media screen and (max-device-width: 600px) {
+        .header,.footer ,.concat .con_left,.copy{
+           display: none;
+        }
+    }
+</style>
+<div id="main" class="main concat">
+    <div class="bg"></div>
+    <div class="con">
+        <div class="con_left">
+            <div class="tip"><h3>你好，<br/>欢迎咨询</h3></div>
+            <div class="tip"><p>或者在右边表单预约试听课程，我们将第一时间联系您</p></div>
+            <div class="card">
+                <div class="card-block">
+                    <div class="left"><img src="/static/addons/cms/images/telb.png" alt=""></div>
+                    <div class="right">
+                        <div class="top">全国咨询热线</div>
+                        <div class="bottom">18138837397</div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="left"><img src="/static/addons/cms/images/weixinb.png" alt=""></div>
+                    <div class="right">
+                        <div class="top">微信咨询</div>
+                        <div class="bottom">cqgx178</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            {include file="concat_form" /}
+        </div>
+    </div>
+
+</div>
+<script src="__STATIC__/libs/vue/vue.js"></script>
+<script src="__STATIC__/libs/element/element.js"></script>
+{include file="footer" /}

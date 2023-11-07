@@ -1,0 +1,41 @@
+{include file="header" /}
+<style type="text/css">
+body {
+    background: #f6f7fa;
+}
+.card{
+    display: flex;
+    margin:100px auto;
+    background: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+.left{
+    width:30%;
+    padding:10px;
+}
+.right{
+    width:70%;
+    padding:30px;
+}
+.title{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+</style>
+<div class="main" style="position: relative;">
+    <div class="w1200 card">
+        <div class="left">
+            <img src="{$thumb}" alt="">
+        </div>
+        <div class="right">
+            <div class="title">{$title}</div>
+            <div>
+                {$content|raw}
+            </div>
+        </div>
+    </div>
+</div>
+{include file="footer" /}

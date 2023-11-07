@@ -1,0 +1,126 @@
+<style>
+    .el-form-item {
+        margin-bottom: 15px;
+    }
+
+    .el-form-item__content {
+        line-height: 32px;
+    }
+
+    .concat_form {
+        margin: 0 auto;
+        width: 300px;
+        padding: 40px 50px;
+        border-radius: 8px;
+        background: url(/static/addons/cms/images/seek.png) no-repeat 0 0;
+        background-size: cover;
+        --el-component-size-large: 50px;
+        --el-input-height: 50px;
+        --el-input-inner-height: calc(var(--el-input-height) - 2px);
+        --el-input-border-radius: 8px;
+    }
+
+    .concat_form .title {
+        font-weight: 700;
+        font-size: 18px;
+        color: #1b1f2e;
+        text-align: left;
+    }
+
+    .concat_form .el-form {
+        padding-top: 40px;
+    }
+
+    .concat_form .btnsub, .concat_form .btnsub .el-button, .concat_form .el-form .el-select {
+        width: 100%;
+    }
+
+    .el-button {
+        background: #3961fb;
+    }
+</style>
+<link rel="stylesheet" href="__STATIC__/libs/element/element.css">
+
+<div id="concat_form" class="concat_form">
+    <h6 class="title">预约试听精品课程</h6>
+    <el-form ref="form" :model="form" :rules="rules">
+        <el-form-item label="" prop="name">
+            <el-input type="password" v-model="form.name" placeholder="姓名"></el-input>
+        </el-form-item>
+        <el-form-item label="" prop="tel">
+            <el-input type="password" v-model="form.tel" placeholder="电话"></el-input>
+        </el-form-item>
+        <el-form-item label="" prop="weixin">
+            <el-input type="password" v-model="form.weixin" placeholder="微信号"></el-input>
+        </el-form-item>
+        <el-form-item label="" prop="intention">
+            <el-select v-model="form.intention" placeholder="意向">
+                <el-option label="美容" value="美容"></el-option>
+                <el-option label="化妆" value="化妆"></el-option>
+                <el-option label="半永久" value="半永久"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="">
+            <el-input type="textarea" v-model="form.remark" placeholder="备注"></el-input>
+        </el-form-item>
+        <el-form-item class="btnsub">
+            <el-button type="primary" @click="submitForm('form')" :loading="loading" :disabled="loading">提交</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+<script src="__STATIC__/libs/vue/vue.js"></script>
+<script src="__STATIC__/libs/element/element.js"></script>
+<script>
+    var app = new Vue({
+        el: "#concat_form",
+        data: {
+            loading: false,
+            form: {
+                name: "",
+                tel: "",
+                weixin: "",
+                intention: "",
+                remark: ""
+            },
+            rules: {
+                name: [
+                    {required: true, message: '请输入姓名', trigger: 'blur'},
+                ],
+                tel: [
+                    {required: true, message: '请输入电话', trigger: 'blur'},
+                ],
+                weixin: [
+                    {required: true, message: '请输入姓名', trigger: 'blur'},
+                ],
+                intention: [
+                    {required: true, message: '请选择意向', trigger: 'blur'},
+                ],
+            }
+        },
+        methods: {
+            submitForm(formName) {
+                this.loading = true
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        $.post("/concat", this.form, (re) => {
+                            if (re.code == 200) {
+                                this.$message({message: "提交成功", type: "success"})
+                            } else {
+                                this.$message({
+                                    message: re.msg,
+                                    type: 'warning'
+                                })
+                            }
+                        })
+                    } else {
+                        return false;
+                    }
+                });
+                setTimeout(() => {
+                    this.loading = false
+                }, 1000)
+            },
+
+        }
+    })
+</script>

@@ -1,0 +1,136 @@
+{include file="header" /}
+<style type="text/css">
+body {
+    /*background: #f6f6f6;*/
+
+}
+.bbanner img {
+    width: 100%;
+}
+
+.item {
+    min-height: 400px;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: center;
+    margin: 40px auto;
+}
+
+.item .fl {
+    width:300px;
+    height:300px;
+    border-radius: 50%;
+    transition: transform 1.2s ease-out;
+}
+
+.item a {
+    padding-top: 6px !important;
+}
+
+.item p {
+    font-size: 16px !important;
+    margin: 5px auto !important
+}
+
+.more {
+    text-align: center;
+    margin: 50px auto;
+}
+
+.more a {
+    background: #FF0000;
+    color: #FFFFFF;
+    padding: 20px 65px;
+    text-align: center;
+    margin: 30px;
+    font-size: 18px;
+    box-shadow: 1PX 2px 1px #bd0000;
+    border-radius: 0.2rem;
+}
+.swiper-wrapper li li:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    /*margin-left: 15px;*/
+}
+.swiper-wrapper li .left {
+    display: flex;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+}
+.swiper-wrapper li .right {
+    width: 50%;
+    margin-left:120px;
+}
+.swiper-wrapper li .right h3{
+    font-size: 20px;
+    margin-bottom: 40px;
+    margin-top: 50px;
+}
+</style>
+<div class="bbanner">
+    {get sql="select * from yzn_picture where title = '化妆师课程-banner'" order="hits DESC" num="1" cache="600" return="banner1"}
+    {volist name="banner1" id="b1v"}
+    <img src="{$b1v.thumb}" alt="">
+    {/volist}
+    {/get}
+</div>
+<div class="main">
+    <div class="w1200">
+        <div class="content">
+            <!--S 右侧内容 -->
+            <div class="swiper">
+                <!--S 文章列表-->
+                <ul class="list swiper-wrapper">
+                    {php}
+                    $catid=request()->param('catid/d',0);
+                    if (empty($catid)) {
+                    $cat = request()->param('catdir/s', '');
+                    $catid = getCategory($cat,'id');
+                    }
+                    $page=request()->param('page/d',1);
+                    $offset=($page-1)*5;
+                    $limit="$offset,6";
+                    {/php}
+                    {yzn module="cms" action="lists" catid="$catid" order="listorder DESC" page="$page" limit="$limit" return="data"}
+                    {volist name="data" id="vo"}
+                    <li class="item clearfix swiper-slide">
+                        <div class="left">
+                            <img class="fl" src="{$vo.thumb}" alt="{$vo.title}">
+                        </div>
+                        <div class="right">
+                            <h3>【{$vo.title}】</h3>
+                            {php}
+                            $did =  $vo["id"];
+                            {/php}
+                            {get sql="select * from yzn_article_data where did = $did" num="1" cache="0"
+                            return="banner2"}
+                            {volist name="banner2" id="b2v"}
+                            {php}
+                            echo htmlspecialchars_decode($b2v["content"]);
+                            {/php}
+                            {/volist}
+                            {/get}
+                        </div>
+                    </li>
+                    {/volist}
+                    {/yzn}
+                </ul>
+                <!--E 文章列表-->
+            </div>
+            <!--E 右侧内容 -->
+            {$pages|raw}
+        </div>
+        <div class="more">
+            <a href="/lists/38.html" target="_blank">点击了解更多课程</a>
+        </div>
+    </div>
+    <div class="bbanner">
+        {get sql="select * from yzn_picture where title = '化妆师课程-底部'" order="hits DESC" num="1" cache="600" return="banner1"}
+        {volist name="banner1" id="b1v"}
+        <img src="{$b1v.thumb}" alt="">
+        {/volist}
+        {/get}
+    </div>
+</div>
+
+{include file="footer" /}
